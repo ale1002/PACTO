@@ -1,0 +1,87 @@
+<div class="body animated fadeIn">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10">
+                <h3>&nbsp;&nbsp;Detalle Hoja de Campo</h3>
+            </div>
+            <div class="col">
+                <a [routerLink]="['/hojacampo']" routerLinkActive="router-link-active"  class="edit btn btn-danger" data-toggle="modal">Regresar</a>
+            </div>
+        </div>
+        <div class="card my-3">
+            <br>
+            <form>
+                <div class="container-fluid">
+                    <div class="form-group">
+                        <label for="sel1"><b>Dia:</b></label>
+                        <select class="form-control" id="sel1" formControlName="dias_det">
+                            <option>Lunes</option>
+                            <option>Martes</option>
+                            <option>Miercoles</option>
+                            <option>Jueves</option>
+                            <option>Viernes</option>
+                            <option>Sábado</option>
+                            <option>Domingo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><b>Descripcion:</b></label>
+                        <input type="text" class="form-control" required formControlName="des_det">
+                    </div>
+                    <!--div class="form-group row">
+                        <div class="col">
+                            <label><b>Nombre:</b></label>
+                            <input type="text" class="form-control" required formControlName="nombre">
+                        </div>
+                        <div class="col">
+                            <label><b>Apellido:</b></label>
+                            <input type="text" class="form-control" required formControlName="apellido">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col">
+                            <label><b>Teléfono:</b></label>
+                            <input type="text" class="form-control" required formControlName="tlfc">
+                        </div>
+                        <div class="col">
+                            <label><b>Celular:</b></label>
+                            <input type="text" class="form-control" required formControlName="tlfm">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col">
+                            <label><b>Parroquia:</b></label>
+                            <input type="text" class="form-control" formControlName="parroquia">
+                        </div>
+                        <div class="col">
+                            <label><b>Sector:</b></label>
+                            <input type="text" class="form-control" formControlName="sector">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col">
+                            <label><b>Barrio:</b></label>
+                            <input type="text" class="form-control" formControlName="barrio">
+                        </div>
+                        <div class="col">
+                            <label><b>Hectáreas:</b></label>
+                            <input type="text" class="form-control" formControlName="hectareas">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label><b>E-mail:</b></label>
+                        <input type="email" class="form-control" required formControlName="email">
+                    </div>
+                    <div class="form-group">
+                        <label><b>Contraseña:</b></label>
+                        <input type="password" class="form-control" required formControlName="password">
+                    </div-->
+                </div>
+                <div class="container-fluid modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+                    <input type="submit" class="btn btn-success" value="Agregar">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,229 @@
+<app-navbar></app-navbar>
+
+<div id="addProductosSocio" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form class="was-validated" [formGroup]="productosSocioForm" (ngSubmit)="enviar(productosSocioForm.value)">
+
+				<div class="modal-header">
+					<h4 class="modal-title">Productos</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+							<div class="form-group">
+								<label for="sel1"><b>Producto</b></label>
+								<select class="custom-select" id="sel1" formControlName="id_pro" required>
+									<option>Escoja una categoria</option>
+									<option *ngFor="let producto of productos" [value]="producto._id">
+										{{producto.nom_pro.toString()}}</option>
+								</select>
+								<div class="invalid-feedback" role="alert" *ngIf="productosSocioForm.get('id_pro').touched">
+									Campo requerido.
+								</div>
+							</div>
+					<!--<div class="form-group">
+								<label for="sel1"><b>Asociación:</b></label>
+								<select class="custom-select" id="sel1" formControlName="nombre_aso" required>
+									<option>Escoja una asociación</option>
+									<option *ngFor="let asociacion of asociaciones">{{asociacion.nombre_aso}}</option>
+								</select>
+								<div class="invalid-feedback" role="alert" *ngIf="asociacionForm.get('nombre_aso').touched">
+									Campo requerido
+								</div>
+							</div>-->
+
+					<!--<div class="form-group">
+						<label><b>Nombre:</b></label>
+						<input type="text" class="form-control" required formControlName="id_soc">
+						<div class="invalid-feedback" role="alert" *ngIf="productosSocioForm.get('nom_pro').touched">
+							Campo requerido
+						</div>
+					</div>
+					<div class="form-group">
+						<label><b>Detalle:</b></label>
+						<input type="text" class="form-control" formControlName="desc_pro">
+					</div>-->
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label><b>Cantidad:</b></label>
+							<input type="text" class="form-control" formControlName="can_ps">
+						</div>
+						<div class="form-group col-md-6">
+							<label><b>Precio:</b></label>
+							<input type="text" class="form-control" formControlName="pre_ps">
+						</div>
+					</div>
+					<div class="form-group">
+						<label><b>Fecha de Registro:</b></label>
+						<input type="date" class="form-control" formControlName="fech_ps">
+
+					</div>
+					<div class="form-row">
+						
+						<div class="form-group col-md-6">
+							<label><b>Fecha de elaboración:</b></label>
+							<input type="date" class="form-control" formControlName="fecha_ela_pro">
+
+						</div>
+						<div class="form-group col-md-6">
+							<label><b>Fecha de caducidad:</b></label>
+							<input type="date" class="form-control" formControlName="fecha_cad_pro">
+
+						</div>
+
+					</div>
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+					<input type="submit" class="btn btn-success" value="Agregar">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
+<div id="detalleProductosSocio" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="card">
+				<div class="card-body">
+					<div class="modal-header">
+						<h4 class="modal-title">Detalle Producto</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div><br>
+					<form *ngIf="prodSocio">
+						Producto: {{prodSocio.id_pro.nom_pro.toString()}}<br>
+						Usuario: {{prodSocio.id_soc.nombre.toString()}}<br>
+						Asociacion: {{prodSocio.aso_ps.nombre_aso.toString()}}<br>
+						Cantidad: {{prodSocio.can_ps}}<br>
+						Precio: {{prodSocio.pre_ps}}<br>
+						Fecha: {{prodSocio.fech_ps}}<br>
+						Fecha elaboración: {{prodSocio.fecha_ela_pro}}<br>
+						Fecha de caducidad: {{prodSocio.fecha_cad_pro}}<br>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--<div id="editProductos" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form (ngSubmit)="onEdit( f )" #f="ngForm">
+				<div class="modal-header">
+					<h4 class="modal-title">Nuevo Producto</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label><b>Nombre:</b></label>
+						<input [(ngModel)]="productoUpdate.nom_pro" type="text" class="form-control" required name="nom_pro">
+					</div>
+					<div class="form-group">
+            <label><b>Detalle:</b></label>
+            <input [(ngModel)]="productoUpdate.desc_pro" type="text" class="form-control" name="desc_pro">
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-4">
+						<label><b>Unidades:</b></label>
+						<input [(ngModel)]="productoUpdate.uni_pro" type="text" class="form-control" required name="uni_pro">
+					</div>
+					<div class="form-group col-md-4">
+						<label><b>Stock:</b></label>
+						<input [(ngModel)]="productoUpdate.sto_pro" type="text" class="form-control" name="sto_pro">
+          </div>
+          <div class="form-group col-md-4">
+						<label><b>Precio:</b></label>
+						<input [(ngModel)]="productoUpdate.pvp_pro" type="text" class="form-control" required name="uni_pro">
+		  </div>
+					</div>
+          <div class="form-row">
+			<div class="form-group col-md-6">
+						<label><b>Fecha elaboración:</b></label>
+						<input [(ngModel)]="productoUpdate.fecha_ela_pro" type="date" class="form-control" required name="fecha_ela_pro">
+          </div>
+          <div class="form-group col-md-6">
+						<label><b>Fecha caducidad:</b></label>
+						<input [(ngModel)]="productoUpdate.fecha_cad_pro" type="date" class="form-control" required name="fecha_cad_pro">
+		  </div>
+		  </div>
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default"  data-dismiss="modal" value="Cancelar">
+					<input type="submit" class="btn btn-success" value="Agregar">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>-->
+
+<div id="deleteProdSocio" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form (ngSubmit)="delete()">
+				<div class="modal-header">
+					<h4 class="modal-title">Eliminar Producto</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+					<p>¿Esta seguro que quieres eliminar?</p>
+
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+					<input type="submit" class="btn btn-danger" value="Eliminar">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="body animated fadeIn">
+	<div class="container-fluid">
+		<div>
+			<br>
+			<div class="row">
+				<h3 class="col-md-10">&nbsp;&nbsp;Productos</h3>
+				<a class="btn btn-success" data-toggle="modal" href="#addProductosSocio"><i
+						class="fas fa-plus-square"></i>&nbsp;&nbsp;<span>Agregar</span></a>
+			</div>
+			<div class="card my-3">
+				<br>
+				<div class="container-fluid table-responsive" aria-label="Page navigation example">
+					<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover">
+						<thead>
+							<tr>
+								<th scope="col">Nombre producto</th>
+                                <th scope="col">Socio</th>
+								<th scope="col">Asociacion</th>
+								<th scope="col">Cantidad</th>
+								<th scope="col">Precio</th>
+								<th scope="col">Opciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let prodSocio of prodSocios">
+								<td>{{prodSocio.id_pro.nom_pro}}</td>
+                                <td>{{prodSocio.id_soc.nombre}}</td>
+								<td>{{prodSocio.aso_ps.nombre_aso}}</td>
+								<td>{{prodSocio.can_ps}}</td>
+								<td>{{prodSocio.pre_ps}}</td>
+								<td>
+									<button type="button" class="btn btn-outline-primary" href="#detalleProductosSocio"
+										data-toggle="modal" (click)="onClick(prodSocio)">Detalle</button>&nbsp;
+									<!--<button type="button" class="btn btn-outline-warning" href="#editProductos" data-toggle="modal" (click)="openModalActualizar(producto._id)"><i class="fas fa-edit"></i></button>&nbsp;-->
+									<button type="button" class="btn btn-outline-danger" href="#deleteProdSocio"
+										data-toggle="modal" (click)="openModalActualizar(prodSocio._id)"><i
+											class="far fa-trash-alt"></i></button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,162 @@
+<!--MODALLLLLL-->
+<!-- ADD Modal HTML -->
+<div id="addAsiscapa" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form>
+				<div class="modal-header">						
+					<h4 class="modal-title">Nueva Asistencia</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">					
+					<div class="form-group">
+						<label><b>Nombre:</b></label>
+						<input type="text" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label><b>Apellido:</b></label>
+						<input type="text" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label><b>Asistencia:</b></label>
+						<select class="form-control" id="exampleFormControlSelect1">                            
+                            <option value="0">Asiste</option>
+                            <option value="1">Atraso</option>
+                            <option value="2">Falta</option>
+                          </select>
+					</div>
+					<div class="form-group">
+						<label><b>Certificado:</b></label>
+						<div class="custom-file">
+							<input type="file" class="custom-file-input" id="validatedCustomFile" lang="es">
+    						<label class="custom-file-label" for="validatedCustomFile">Escoger Archivo</label>
+						</div>
+						
+    					<!--<label class="form-control" for="validatedCustomFile">Archivo</label>-->
+                    </div>			
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+					<input type="submit" class="btn btn-success" value="Agregar">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- Edit Modal HTML-->
+<div id="editAsiscapa" class="modal fade">
+    <div class="modal-dialog">
+		<div class="modal-content">
+			<form>
+				<div class="modal-header">						
+					<h4 class="modal-title">Nueva Asistencia</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">					
+					<div class="form-group">
+						<label><b>Nombre:</b></label>
+						<input type="text" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label><b>Apellido:</b></label>
+						<input type="text" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label><b>Asistencia:</b></label>
+						<select class="form-control" id="exampleFormControlSelect1">                            
+                            <option value="0">Asiste</option>
+                            <option value="1">Atraso</option>
+                            <option value="2">Falta</option>
+                          </select>
+					</div>
+					<div class="form-group">
+						<label><b>Certificado:</b></label>
+						<div class="custom-file">
+							<input type="file" class="custom-file-input" id="validatedCustomFile" lang="es">
+    						<label class="custom-file-label" for="validatedCustomFile">Escoger Archivo</label>
+						</div>
+						
+    					<!--<label class="form-control" for="validatedCustomFile">Archivo</label>-->
+                    </div>			
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+					<input type="submit" class="btn btn-success" value="Agregar">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- Delete Modal HTML -->
+<div id="deleteAsiscapa" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form>
+				<div class="modal-header">						
+					<h4 class="modal-title">Eliminar Asistencia</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">					
+					<p>¿Está seguro que quieres eliminar?</p>
+					
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+					<input type="submit" class="btn btn-danger" value="Eliminar">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!--FIN      MODALLLLLL-->
+
+<!--TABLA ASISTENCIA CAPACITACION-->
+<div class="body animated fadeIn">
+	<div class="container-fluid">
+	  <div>
+		<br>
+		<div class="row">
+		  <h3 class="col-md-10">&nbsp;&nbsp;Asistencia Capacitacion</h3><br><a [routerLink]="['/capacitacion']" routerLinkActive="router-link-active"  class="edit btn btn-danger" data-toggle="modal">Regresar</a>
+		  <div class="col">
+			<a href="#addAsiscapa" class="btn btn-success" data-toggle="modal"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;<span>Agregar</span></a>
+		  </div>
+		</div>
+		<div class="card my-3">
+		  <br>
+		  <div class="container-fluid table-responsive" aria-label="Page navigation example">
+			<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover">
+			  <thead>
+				<tr>
+					<th scope="col" class="text-center">Nombre</th>
+					<th scope="col" class="text-center">Apellido</th>
+					<th scope="col" class="text-center">Asistencia</th>
+					<th scope="col" class="text-center"></th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr  *ngFor="let usuario of usuarios" > 
+					
+					<td scope="row" class="text-center">{{usuario.nombre}}</td>
+					<td scope="row" class="text-center">{{usuario.apellido}}</td>
+					<td></td>
+					<td></td>
+								
+					<!--<td>
+						<div style="text-align: center">
+						  <a href="#editEmployeeModal" class="edit btn btn-secondary" data-toggle="modal">Certificado</a>&nbsp;&nbsp;&nbsp;
+						  <a href="#editEmployeeModal" class="btn btn-outline-warning" data-toggle="modal"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;
+						  <a href="#deleteEmployeeModal" class="btn btn-outline-danger" data-toggle="modal"><i class="far fa-trash-alt"></i></a>
+						</div>
+		
+					  </td>-->
+					
+			  </tbody>
+			</table>
+		  </div>		  
+		  <br>
+		</div>		
+	  </div>
+	</div>
+  </div>
+  

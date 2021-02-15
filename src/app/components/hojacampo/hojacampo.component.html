@@ -1,0 +1,62 @@
+<app-navbar></app-navbar>
+
+<div id="deleteUser" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form>
+				<div class="modal-header">
+					<h4 class="modal-title">Eliminar Usuario</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">					
+					<p>¿Está seguro que quieres eliminar este Usuario?</p>					
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+					<input type="submit" class="btn btn-danger" value="Eliminar">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="body animated fadeIn">
+    <div class="container-fluid">
+        <div>
+            <br>
+            <div class="row">
+                <div class="col-md-10">
+                    <h3>&nbsp;&nbsp;Hoja de Campo</h3>
+                </div>
+                <div class="col">
+                    <a [routerLink]="['/dethojacampo/:id']" class="btn btn-success" data-toggle="modal"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;<span>Agregar</span></a>
+                </div>
+            </div>
+            <div class="card my-3">
+                <br>
+                <div class="container-fluid table-responsive" aria-label="Page navigation example">
+                    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Dia</th>
+                                <th scope="col">Detalle</th>
+                                <th scope="col">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="">
+                                <td>{{campo.dias_det}}</td>
+                                <td>{{campo.des_det}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-warning" [routerLink]="['/dethojacampo/:id']" data-toggle="modal"><i class="fas fa-edit"></i></button>&nbsp;
+                                    <button type="button" class="btn btn-outline-danger" href="#deleteUser" data-toggle="modal"><i class="far fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>

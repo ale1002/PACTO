@@ -1,0 +1,152 @@
+<app-navbar></app-navbar>
+
+<div id="addAsociaciones" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]="asociacionesForm" (ngSubmit)="enviar(asociacionesForm.value)">  
+                
+                <div class="modal-header">
+                    <h4 class="modal-title">Nuevo Asociación</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label><b>Nombre:</b></label>
+                        <input type="text" class="form-control" required formControlName="nombre_aso">
+                    </div>
+                    <div class="form-group">
+                        <label><b>Certificado:</b></label>
+                        <input type="text" class="form-control" required formControlName="certificado_aso">
+                    </div>
+                    <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label><b>Sector:</b></label>
+                        <input type="text" class="form-control" required formControlName="sector_aso">
+                    </div>
+                    <div class="form-group col-md-4">   
+                        <label><b>Barrio:</b></label>
+                        <input type="text" class="form-control" required formControlName="barrio_aso">                  
+                    </div>
+                    <div class="form-group col-md-4">   
+                        <label><b>Parroquia:</b></label>
+                        <input type="text" class="form-control" required formControlName="parroquia_aso">               
+                    </div>
+                </div>
+                <div class="form-group">
+
+          </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default"  data-dismiss="modal" value="Cancelar">
+                    <input type="submit" class="btn btn-success" value="Agregar">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="editAsociaciones" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form (ngSubmit)="onEdit( f )" #f="ngForm">
+                <div class="modal-header">
+                    <h4 class="modal-title">Nueva Asociación</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label><b>Nombre:</b></label>
+                        <input [(ngModel)]="asociacionUpdate.nombre_aso" type="text" class="form-control" required name="nombre_aso">
+                    </div>
+                    <div class="form-group">
+            <label><b>Certificado:</b></label>
+            <input [(ngModel)]="asociacionUpdate.certificado_aso" type="text" class="form-control" required name="certificado_aso">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                        <label><b>Sector:</b></label>
+                        <input [(ngModel)]="asociacionUpdate.sector_aso" type="text" class="form-control" required name="sector_aso">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label><b>Barrio:</b></label>
+                        <input [(ngModel)]="asociacionUpdate.barrio_aso" type="text" class="form-control" required name="barrio_aso">
+          </div>
+          <div class="form-group col-md-4">
+                        <label><b>Parroquia:</b></label>
+                        <input [(ngModel)]="asociacionUpdate.parroquia_aso" type="text" class="form-control" required name="parroquia_aso">
+          </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default"  data-dismiss="modal" value="Cancelar">
+                    <input type="submit" class="btn btn-success" value="Agregar">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="deleteAsociaciones" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form (ngSubmit)="delete()">
+                <div class="modal-header">
+                    <h4 class="modal-title">Eliminar Asociación</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Esta seguro que quieres eliminar?</p>
+
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                    <input type="submit" class="btn btn-danger" value="Eliminar">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="body animated fadeIn">
+  <div class="container-fluid">
+    <div>
+      <br>
+      <div class="row">
+        <h3 class="col-md-10">&nbsp;&nbsp;Asociaciones</h3>
+        <a class="btn btn-success" data-toggle="modal" href="#addAsociaciones"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;<span>Agregar</span></a>
+      </div>
+      <div class="card my-3">
+          <br>
+        <div class="container-fluid table-responsive" aria-label="Page navigation example">
+         <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Certificado</th>
+                <th scope="col">Sector</th>
+                <th scope="col">Barrio</th>
+                <th scope="col">Parroquia</th>
+                <th scope="col">Opciones</th>
+              </tr>
+            </thead>
+            <tbody >
+              <tr *ngFor="let asociacion of asociaciones">               
+                <td>{{asociacion.nombre_aso}}</td>
+                <td>{{asociacion.certificado_aso}}</td>
+                <td>{{asociacion.sector_aso}}</td>
+                <td>{{asociacion.barrio_aso}}</td>
+                <td>{{asociacion.parroquia_aso}}</td>
+                                
+                <td>
+    
+                  <button type="button" class="btn btn-outline-warning" href="#editAsociaciones" data-toggle="modal" (click)="openModalActualizar(asociacion._id)"><i class="fas fa-edit"></i></button>&nbsp;
+                  <button type="button" class="btn btn-outline-danger" href="#deleteAsociaciones" data-toggle="modal" (click)="openModalActualizar(asociacion._id)"><i class="far fa-trash-alt"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

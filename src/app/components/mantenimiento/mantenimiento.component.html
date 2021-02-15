@@ -1,0 +1,152 @@
+<!--NAVBAR-->
+<app-navbar></app-navbar>
+<!--MODAL-->
+<!-- ADD Modal HTML -->
+<div id="addMantenimiento" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form class="was-validated" [formGroup]="mantenimientosForm" (ngSubmit)="enviar(mantenimientosForm.value)">
+				<div class="modal-header">
+					<h4 class="modal-title">Nuevo Mantenimiento</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label><b>Fecha:</b></label>
+						<input type="date" class="form-control" formControlName="fech_man_maq" required>
+						<div class="invalid-feedback" role="alert">
+							Campo requerido
+						</div>
+					</div>
+					<div class="form-group">
+						<label><b>Tipo:</b></label>
+						<select class="form-control" id="exampleFormControlSelect1" formControlName="tipo_man_maq" required>                            
+                            <option>Vehículo</option>
+                          	<option>Cortadora</option>
+                          	<option>Moledora</option>
+                         	<option>Empacadora</option>
+						</select>
+						<div class="invalid-feedback" role="alert">
+							Campo requerido
+						</div>
+					</div>
+					<div class="form-group">
+						<label><b>Descripción:</b></label>
+						<textarea type="text" class="form-control" formControlName="des_man_maq" required></textarea>
+						<div class="invalid-feedback" role="alert">
+							Campo requerido
+						</div>
+					</div>
+					<div class="form-group">
+						<label><b>Estado:</b></label>
+						<select class="form-control" id="exampleFormControlSelect1" formControlName="check_man_maq" required>                            
+							<option>Funcional</option>
+                          	<option>Averiado</option>
+						</select>
+						<div class="invalid-feedback" role="alert">
+							Campo requerido
+						</div>
+          			</div>
+          			<div class="form-group">
+						<label><b>Costo:</b></label>
+						<input type="text" class="form-control" formControlName="costo_man_maq" required>
+						<div class="invalid-feedback" role="alert">
+							Campo requerido
+						</div>
+					</div>
+					<div class="form-group">
+						<label><b>Próximo Mantenimiento:</b></label>
+						<input type="date" class="form-control" formControlName="proximo_man_maq" required>
+						<div class="invalid-feedback" role="alert">
+							Campo requerido
+						</div>
+					</div>
+					<div class="form-group">
+						<label><b>Marca:</b></label>
+						<input type="text" class="form-control" formControlName="marca_man_maq" required>
+						<div class="invalid-feedback" role="alert">
+							Campo requerido
+						</div>
+                    </div>
+          			<div class="form-group">
+						<label><b>Kilometraje:</b></label>
+						<input type="number" min="1" class="form-control" formControlName="km_man_maq" required>
+          			</div>
+          			<div class="form-group">
+						<label><b>Placa:</b></label>
+						<input type="text" class="form-control" formControlName="placa_man_maq" required>
+						<div class="invalid-feedback" role="alert">
+							Campo requerido
+						</div>
+          			</div>
+          			<div class="form-group">
+						<label><b>Origen:</b></label>
+						<input type="text" class="form-control" formControlName="origen_man_maq" required>
+						<div class="invalid-feedback" role="alert">
+							Campo requerido
+						</div>
+          			</div>
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+					<input type="submit" class="btn btn-success" value="Agregar">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!--TABLA-->
+<div class="container-fluid main-container">
+	<div class="table-title">
+		<div class="row">
+            <h3 class="col-md-10">&nbsp;&nbsp;Mantenimiento</h3><br><br>
+            <div class="col">			
+              <a href="#addMantenimiento" class="btn btn-success" data-toggle="modal"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;<span> Nueva</span></a>
+            </div>			 			
+		</div>
+	</div>
+	<div class="body animated fadeIn">
+		<div class="container-fluid">
+		  	<div>
+				<div class="card my-3"><br>
+			  		<div class="container-fluid" aria-label="Page navigation example">
+				  		<div class="table-responsive">
+							<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover">
+								<thead >
+						  			<tr>
+										<th scope="col">Fecha</th>
+										<th scope="col">Tipo</th>
+										<th scope="col">Descripción</th>                            
+										<th scope="col">Estado</th> 
+										<th scope="col">Costo</th> 
+										<th scope="col">PróximoM</th>
+										<th scope="col">Marca</th> 
+										<th scope="col">Kilometraje</th>
+										<th scope="col">Placa</th>
+										<th scope="col">Origen</th>                                                   
+						  			</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let mantenimiento1 of mantenimientos">
+										<td>{{mantenimiento1.fech_man_maq}}</td>
+										<td>{{mantenimiento1.tipo_man_maq}}</td>
+										<td>{{mantenimiento1.des_man_maq}}</td>
+										<td>{{mantenimiento1.check_man_maq}}</td>
+										<td>{{mantenimiento1.costo_man_maq}}</td> 
+										<td>{{mantenimiento1.proximo_man_maq}}</td>
+										<td>{{mantenimiento1.marca_man_maq}}</td>                               
+										<td>{{mantenimiento1.km_man_maq}}</td>
+										<td>{{mantenimiento1.placa_man_maq}}</td>	
+										<td>{{mantenimiento1.origen_man_maq}}</td>				  							  
+									</tr>
+								</tbody>
+                    		</table>
+            			</div>
+					</div>
+					<br>
+        		</div>        
+			</div>
+		</div>
+	</div>
+</div>

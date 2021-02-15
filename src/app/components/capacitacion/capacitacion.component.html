@@ -1,0 +1,360 @@
+<!--NAVBAR-->
+<app-navbar></app-navbar>
+<!--MODAL-->
+<!-- ADD Modal HTML -->
+
+<div id="addCapacitacion" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!--<form #userPost="ngForm" (ngSubmit)="onSubmit(userPost.value)">-->
+      <form
+        class="was-validated"
+        [formGroup]="capacitacionesForm"
+        (ngSubmit)="enviar(capacitacionesForm.value)"
+      >
+        <div class="modal-header">
+          <h4 class="modal-title">Nueva Capacitacion</h4>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-hidden="true"
+          >
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label><b>Tema:</b></label>
+            <input
+              type="text"
+              class="form-control"
+              required
+              formControlName="tem_cap"
+            />
+          </div>
+          <div class="form-group">
+            <label><b>Fecha Inicio:</b></label>
+            <input
+              type="date"
+              class="form-control"
+              required
+              formControlName="fech_ini_cap"
+            />
+          </div>
+          <div class="form-group">
+            <label><b>Fecha Fin:</b></label>
+            <input
+              type="date"
+              class="form-control"
+              required
+              formControlName="fech_fin_cap"
+            />
+          </div>
+          <div class="form-group">
+            <label><b>Hora Inicio:</b></label>
+            <input
+              type="Time"
+              class="form-control"
+              required
+              formControlName="hora_ini_cap"
+            />
+          </div>
+          <div class="form-group">
+            <label><b>Hora Fin:</b></label>
+            <input
+              type="Time"
+              class="form-control"
+              required
+              formControlName="hora_fin_cap"
+            />
+          </div>
+          <div class="form-group">
+            <label><b>Entidad:</b></label
+            ><br />
+            <select
+              type="option"
+              class="form-control"
+              required
+              formControlName="id_enti"
+            >
+              <option>Ninguna</option>
+              <option
+                *ngFor="let entidad of entidades"
+                value="{{ entidad._id }}"
+              >
+                {{ entidad.nom_enti }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input
+            type="button"
+            class="btn btn-default"
+            data-dismiss="modal"
+            value="Cancelar"
+          />
+          <input type="submit" class="btn btn-success" value="Agregar" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- id="addCapacitacion" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="was-validated" [formGroup]="capacitacionesForm" (ngSubmit)="enviar(capacitacionesForm.value)">
+                
+                <div class="modal-header">
+                    <h4 class="modal-title">Nueva Capacitacion</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="sel1"><b>Tema:</b></label>
+                        <input type="text" class="form-control" required>
+                        <div class="invalid-feedback" role="alert" *ngIf="capacitacionesForm.get('tem_cap').touched">
+                            Campo requerido
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col">
+                            <label><b>Fecha Inicio:</b></label>
+                            <input type="text" class="form-control" required formControlName="fech_ini_cap">
+                            <div class="invalid-feedback" role="alert" *ngIf="capacitacionesForm.get('fech_ini_cap').touched">
+                                Campo requerido
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label><b>Fecha Fin:</b></label>
+                            <input type="text" class="form-control" required formControlName="fech_fin_cap">
+                            <div class="invalid-feedback" role="alert" *ngIf="capacitacionesForm.get('fech_fin_cap').touched">
+                                Campo requerido
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col">
+                            <label><b>Hora Inicio:</b></label>
+                            <input type="text" class="form-control" required formControlName="hora_ini_cap">
+                            <div class="invalid-feedback" role="alert" *ngIf="capacitacionesForm.get('hora_ini_cap').touched">
+                                Campo requerido
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label><b>Hora Fin:</b></label>
+                            <input type="text" class="form-control" required formControlName="hora_fin_cap">
+                            <div class="invalid-feedback" role="alert" *ngIf="capacitacionesForm.get('hora_fin_cap').touched"> 
+                                Campo requerido
+                            </div>
+                        </div>
+                    </div>                                                         
+                    <div class="form-group">
+                        <label><b>Entidad:</b></label>
+						<input type="options" class="form-control" required formControlName="password">
+						<option></option>
+                        <div class="invalid-feedback" role="alert">
+                           
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+                    <input type="submit" class="btn btn-success" value="Agregar">
+                </div>
+            </form>
+        </div>
+    </div>-->
+
+<!-- Delete Modal HTML -->
+<div id="deleteCapacitacion" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form (ngSubmit)="delete()">
+        <div class="modal-header">
+          <h4 class="modal-title">Eliminar Capacitacion</h4>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-hidden="true"
+          >
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>¿Está seguro que quieres eliminar?</p>
+        </div>
+        <div class="modal-footer">
+          <input
+            type="button"
+            class="btn btn-default"
+            data-dismiss="modal"
+            value="Cancelar"
+          />
+          <input type="submit" class="btn btn-danger" value="Eliminar" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!--TABLA-->
+
+<<<<<<< HEAD
+	<div class="body animated fadeIn">
+	<div class="container-fluid">
+	  <div>
+		<br>
+		<div class="row">
+		  <h3 class="col-md-9">&nbsp;&nbsp;Capacitacion</h3><br><a [routerLink]="['/entidad']" class="btn btn-info" ><span>Entidades</span></a>
+		  <div class="col">
+			<a href="#addCapacitacion" class="btn btn-success" data-toggle="modal"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;<span>Nueva Capacitacion</span></a>
+		  </div>
+		</div>
+		<div class="card my-3">
+		  <br>
+		  <div class="container-fluid table-responsive" aria-label="Page navigation example">
+			<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover">
+			  <thead>
+				<tr>
+					<th scope="col" class="text-center">Tema</th>
+					<th scope="col" class="text-center">Fecha Inicio</th>
+					<th scope="col" class="text-center">Fecha Fin</th>
+					<th scope="col" class="text-center">Hora Inicio</th>
+					<th scope="col" class="text-center">Hora Fin</th>
+					<th scope="col" class="text-center">Entidad</th>				
+					<th scope="col" class="text-center">Acciones</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr *ngFor="let capacitacion of capacitaciones; let i=index">
+					<td scope="row" class="text-center">{{capacitacion.tem_cap}}</td>
+					<td scope="col" class="text-center">{{capacitacion.fech_ini_cap}}</td>
+					<td scope="col" class="text-center">{{capacitacion.fech_fin_cap}}</td>
+					<td scope="col" class="text-center">{{capacitacion.hora_ini_cap}}</td>
+					<td scope="col" class="text-center">{{capacitacion.hora_fin_cap}}</td>	
+					<td scope="col" class="text-center" *ngFor="let entidad of capacitacion.prof_cap">{{entidad.id_enti["nom_enti"]}}</td>										
+					<!--<td scope="col" class="text-center">{{capacitacion.prof_cap[0]._id}}</td>	-->
+														  			
+					<!--<td scope="col" class="text-center">{{capacitacion.prof_cap[0]}}</td>-->
+					<td>
+						<div style="text-align: center">
+							  <a class="btn btn-outline-info" [routerLink]="['/asiscapacitacion',i]">Asistencia</a>&nbsp;&nbsp;
+							  <a href="#editCapacitacion" class="btn btn-outline-warning" data-toggle="modal" (click)="openModalActualizar(capacitacion._id)"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;
+							  <a href="#deleteCapacitacion" class="btn btn-outline-danger" data-toggle="modal" (click)="openModalActualizar(capacitacion._id)"><i class="far fa-trash-alt"></i></a>
+						</div>
+					  </td>
+				  </tr>
+			  </tbody>
+			</table>
+		  </div>
+		  <br>
+		</div>
+	  </div>
+	</div>
+=======
+<div class="body animated fadeIn">
+  <div class="container-fluid">
+    <div>
+      <br />
+      <div class="row">
+        <h3 class="col-md-9">&nbsp;&nbsp;Capacitacion</h3>
+        <br /><a [routerLink]="['/entidad']" class="btn btn-info"
+          ><span>Entidades</span></a
+        >
+        <div class="col">
+          <a href="#addCapacitacion" class="btn btn-success" data-toggle="modal"
+            ><i class="fas fa-plus-square"></i>&nbsp;&nbsp;<span
+              >Nueva Capacitacion</span
+            ></a
+          >
+        </div>
+      </div>
+      <div class="card my-3">
+        <br />
+        <div
+          class="container-fluid table-responsive"
+          aria-label="Page navigation example"
+        >
+          <table
+            datatable
+            [dtOptions]="dtOptions"
+            [dtTrigger]="dtTrigger"
+            class="table table-hover"
+          >
+            <thead>
+              <tr>
+                <th scope="col" class="text-center">Tema</th>
+                <th scope="col" class="text-center">Fecha Inicio</th>
+                <th scope="col" class="text-center">Fecha Fin</th>
+                <th scope="col" class="text-center">Hora Inicio</th>
+                <th scope="col" class="text-center">Hora Fin</th>
+                <th scope="col" class="text-center">Entidad</th>
+                <!--<th scope="col" class="text-center">Entidad</th>-->
+                <th scope="col" class="text-center">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let capacitacion of capacitaciones; let i = index">
+                <td scope="row" class="text-center">
+                  {{ capacitacion.tem_cap }}
+                </td>
+                <td scope="col" class="text-center">
+                  {{ capacitacion.fech_ini_cap }}
+                </td>
+                <td scope="col" class="text-center">
+                  {{ capacitacion.fech_fin_cap }}
+                </td>
+                <td scope="col" class="text-center">
+                  {{ capacitacion.hora_ini_cap }}
+                </td>
+                <td scope="col" class="text-center">
+                  {{ capacitacion.hora_fin_cap }}
+                </td>
+                <td
+                  scope="col"
+                  class="text-center"
+                  *ngFor="let entidad of capacitacion.prof_cap"
+                >
+                  <span>{{entidad.id_enti["nom_enti"]}}</span>
+                </td>
+
+                <!--<td scope="col" class="text-center">{{capacitacion.prof_cap[0].id_enti.nom_enti}}</td>					-->
+                <!--<td scope="col" class="text-center">{{capacitacion.prof_cap[0]}}</td>-->
+                <td>
+                  <div style="text-align: center">
+                    <a
+                      class="btn btn-outline-info"
+                      [routerLink]="['/asiscapacitacion', i]"
+                      >Asistencia</a
+                    >&nbsp;&nbsp;
+                    <a
+                      href="#editCapacitacion"
+                      class="btn btn-outline-warning"
+                      data-toggle="modal"
+                      (click)="openModalActualizar(capacitacion._id)"
+                      ><i class="fas fa-edit"></i></a
+                    >&nbsp;&nbsp;&nbsp;
+                    <a
+                      href="#deleteCapacitacion"
+                      class="btn btn-outline-danger"
+                      data-toggle="modal"
+                      (click)="openModalActualizar(capacitacion._id)"
+                      ><i class="far fa-trash-alt"></i
+                    ></a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <br />
+      </div>
+    </div>
+>>>>>>> f06cc4dd4eb55545a319cd31d7347ea16c09765a
+  </div>
+</div>

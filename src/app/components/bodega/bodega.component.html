@@ -1,0 +1,178 @@
+<!--NAVBAR-->
+<app-navbar></app-navbar>
+<!--MODAL-->
+<!-- ADD Modal HTML -->
+<div id="addPedidoCli" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form>
+				<div class="modal-header">
+					<h4 class="modal-title">Registrar Pedido</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+                        <label for="sel1"><b>Categoría:</b></label>
+                        <select class="form-control" id="sel1">
+                          <option>Categoría A</option>
+                          <option>Categoría B</option>
+                          <option>Categoría C</option>
+                          <option>Categoría D</option>
+                        </select>
+                      </div> 
+                      <div class="form-group">
+                        <label for="sel1"><b>Prodcuto:</b></label>
+                        <select class="form-control" id="sel1">
+                          <option>Prodcuto A</option>
+                          <option>Prodcuto B</option>
+                          <option>Prodcuto C</option>
+                          <option>Prodcuto D</option>
+                        </select>
+                      </div> 
+					<div class="form-group">
+						<label><b>Stock:</b></label>
+						<input type="number" min="1" class="form-control" disabled>
+                    </div>
+                    <div class="form-group">
+						<label><b>Fecha:</b></label>
+						<input type="date" min="1" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sel1"><b>Estado:</b></label>
+                        <select class="form-control" id="sel1">
+                          <option>Entregado</option>
+                          <option>Progreso</option>
+                          <option>Perdido</option>
+                        </select>
+                      </div> 
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+					<input type="submit" class="btn btn-success" value="Agregar">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- Edit Modal HTML-->
+<div id="editPedidoCli" class="modal fade">
+    <div class="modal-dialog">
+		<div class="modal-content">
+			<form>
+				<div class="modal-header">
+					<h4 class="modal-title">Editar Pedido</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+                        <label for="sel1">Categoría:</label>
+                        <select class="form-control" id="sel1">
+                          <option>Categoría A</option>
+                          <option>Categoría B</option>
+                          <option>Categoría C</option>
+                          <option>Categoría D</option>
+                        </select>
+                      </div> 
+                      <div class="form-group">
+                        <label for="sel1">Prodcuto:</label>
+                        <select class="form-control" id="sel1">
+                          <option>Prodcuto A</option>
+                          <option>Prodcuto B</option>
+                          <option>Prodcuto C</option>
+                          <option>Prodcuto D</option>
+                        </select>
+                      </div> 
+					<div class="form-group">
+						<label><b>Cantidad:</b></label>
+						<input type="number" min="1" class="form-control" required>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+					<input type="submit" class="btn btn-success" value="Agregar">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- Delete Modal HTML -->
+<div id="deletePedidoCli" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form>
+				<div class="modal-header">
+					<h4 class="modal-title">Eliminar Pedido</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">					
+					<p>¿Está seguro que quieres eliminar?</p>					
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+					<input type="submit" class="btn btn-danger" value="Eliminar">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!--TABLA-->
+<div class="container-fluid main-container">
+	<div class="table-title">
+		<div class="row">
+			<h3 class="col-md-10">&nbsp;&nbsp;Bodega</h3><br><br>	
+						 
+			<div class="col">
+				<a href="#addPedidoCli" class="btn btn-success" data-toggle="modal"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;<span> Nueva</span></a>
+				<button [routerLink]="['/pedidoadmin']" class="edit btn btn-danger" data-toggle="modal">Regresar</button>&nbsp;&nbsp;
+			</div>
+		</div>
+	</div>
+	<div class="body animated fadeIn">
+		<div class="container-fluid">
+		  <div>
+			<div class="card my-3"><br>
+			  <div class="container-fluid" aria-label="Page navigation example">
+				  <div class="table-responsive">
+					<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover">
+						<thead >
+						  <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Categoría</th>
+							<th scope="col">Producto</th>
+							<th scope="col">Stock</th>
+                            <th scope="col">Fecha Entrega</th>
+                            <th scope="col">Estado</th>                                                     
+						  </tr>
+						</thead>
+						<tbody>
+						  <tr *ngFor="let bodega of data">
+							  <th scope="row" class="text-center">{{bodega.id}}</th>
+							  <td>Lacteo</td>
+							  <td>Leche</td>
+							  <td>100</td>
+							  <td>30/01/2021</td>
+							  <td>Progreso</td>
+							  							  							  
+							</tr>
+						</tbody>
+                      </table>
+                     
+                    </div>
+				  </div>
+				
+              </div>
+              <div class="row">
+                       		 
+                <div class="col">			
+                    <a href="" class="btn btn-success" >&nbsp;&nbsp;<span>Imprimir</span></a>&nbsp;&nbsp;
+                </div>
+
+			</div>
+		  </div>
+		</div>
+	  </div>
+</div>
+
+  

@@ -1,0 +1,138 @@
+<!--NAVBAR-->
+<app-navbar></app-navbar>
+<!--MODAL-->
+<!-- ADD Modal HTML -->
+<div id="addReunion" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form  [formGroup]="reunionesForm" (ngSubmit)="enviar(reunionesForm.value)">
+				<div class="modal-header">
+					<h4 class="modal-title">Nueva Reunión</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+                    <div class="form-group">
+						<label><b>Tema:</b></label>
+						<input type="text" min="1" class="form-control" required formControlName="tema_reun">
+					</div>
+					<div class="form-group">
+						<label><b>Tipo:</b></label>
+						<select  class="form-control" required formControlName="tipo_reun">
+							<option>Ordinaria</option>
+							<option >Extraordinaria</option>
+						  </select>
+                    </div>
+					<div class="form-group">
+						<label><b>Fecha:</b></label>
+						<input type="date" min="1" class="form-control" required formControlName="fec_reu">
+                    </div>
+				<div class="form-row">
+                    <div class="form-group col-md-6">
+						<label><b>Hora:</b></label>
+						<input type="time" min="1" class="form-control" required formControlName="hor_reu">
+                    </div>
+                    <div class="form-group col-md-6">
+						<label><b>Multa:</b></label>
+						<input type="number" min="1" class="form-control" required formControlName="mul_reu">
+                    </div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label><b>Socio:</b></label>
+							<select class="custom-select" id="sel1" formControlName="id_soc" required>
+								<option *ngFor="let reuniones of asistencia" [value]="asistencia.id_soc">{{reuniones.nombre}}</option>
+							</select>
+							
+						</div>
+					</div>
+						<div class="form-group ">
+							<label><b>Asistencia:</b></label>&nbsp;&nbsp;&nbsp;&nbsp;
+							<label></label>
+							<label></label>
+							<input type="checkbox" class="form-check-input" >
+						</div>
+						
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+					<input type="submit" class="btn btn-success" value="Agregar">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!--TABLA-->
+<div class="container-fluid main-container">
+	<div class="table-title">
+		<div class="row">
+            <h3 class="col-md-10">&nbsp;&nbsp;Reunión</h3><br><br>		 
+			<div class="col">			
+				<a href="#addReunion" class="btn btn-success" data-toggle="modal"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;<span> Nueva</span></a>
+			</div>
+		</div>
+	</div>
+	<div class="body animated fadeIn">
+		<div class="container-fluid">
+		  <div>
+			<div class="card my-3">
+				<br>
+			  <div class="container-fluid" aria-label="Page navigation example">
+				  <div class="table-responsive">
+					<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover">
+						<thead >
+						  <tr>
+                           
+							
+							<th scope="col">Tema</th>
+							<th scope="col">Tipo</th>
+							<th scope="col">Fecha</th>
+                            <th scope="col">Hora</th>
+                            <th scope="col">Multa</th>
+							<th scope="col">Socio</th>
+							<th scope="col">Asistencia</th>
+							<th scope="col">Subir Acta</th>
+							<th scope="col">Descargar Acta</th>  
+                                                                           
+						  </tr>
+						</thead>
+						<tbody>
+						  <tr *ngFor="let reunion of reuniones let i=index">
+							 
+							  <td>{{reunion.tema_reun}}</td>
+							  <td>{{reunion.tipo_reun}}</td>
+							  <td>{{reunion.fec_reu}}</td>
+							  <td>{{reunion.hor_reu}}</td>
+							  <td>{{reunion.mul_reu}}</td>
+							  <td *ngFor="let socio of reunion.asistencia">{{socio.id_soc["nombre"]}}</td>
+							  <td *ngFor="let socio of reunion.asistencia">{{socio.asist_socio}}</td>
+							  <td><input type="file"  name="archivosubido"></td>
+							  <td><a [href]="fileUrl" download="file.txt"  class="btn btn-info">Acta</a>
+							  </td>
+							  
+						<!---	  <td>
+								  <button [routerLink]="['/asisreunion/:id']" class="btn btn-outline-info">Asistencia</button>
+                              </td>	-->						  							  
+							</tr>
+						</tbody>
+                      </table>
+                     
+                    </div>
+				  </div>
+				
+              </div>
+              <div class="row">
+
+
+				
+			</div>
+		  </div>
+		</div>
+	  </div>
+</div>
+
+  
+
+
+  
+

@@ -1,0 +1,197 @@
+<!--NAVBAR-->
+<app-navbar></app-navbar>
+<!--MODAL-->
+<!-- ADD Modal HTML -->
+<div id="addPedidoCli" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form (ngSubmit)="enviar( f )" #f="ngForm">
+				<div class="modal-header">
+					<h4 class="modal-title">Nuevo Pedido</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+					Cliente <input type="text" class="form-control"name="nombre" [(ngModel)]="usuario.nombre"/><br/>
+					<br>
+					Fecha <input type="date" class="form-control"name="fecha"[(ngModel)]="pedido1.fec_fac"/><br>
+					<br>
+					Producto <input type="text" class="form-control"name="producto"[(ngModel)]="producto1.nom_pro"/><br>
+					<br>
+					Precio <input type="text" class="form-control" name="precio" [(ngModel)]="producto1.pvp_pro"/><br>
+					<br>
+					Cantidad <input type="text" class="form-control"name="cantidad"[(ngModel)]="pedido1.detalle['cantidad']"/><br>
+					<br>
+					Subtotal <input type="text" class="form-control"name="total" [(ngModel)]="pedido1.detalle['subtotal']"/><br/>
+					<br>
+					Estado <select name="estado" class="form-control" [(ngModel)]="pedido1.estado">
+						<option>En camino</option>
+						<option>Pendiente</option>
+						<option>Entregado</option>
+					</select><br>
+					<br>
+					<input type="button" value="Registrar Pedido" />
+					<br>
+					<h4>pedidos ingresados</h4>
+
+					<table border="1">
+						<tr *ngFor="let pedido1 of pedidos">
+							<td>{{usuario.nombre}}</td>
+							<td>{{pedido1.fec_fac}}</td>
+							<td>{{producto1.nom_pro}}</td>
+							<td>{{producto1.pvp_pro}}</td>
+							<td>{{pedido1.detalle['cantidad']}}</td>
+							<td>{{pedido1.detalle['subtotal']}}</td>
+							<td>{{pedido1.estado}}</td>							
+						</tr>
+					</table>
+					
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Confirmar Pedido"/>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- Edit Modal HTML-->
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" style="text-align: center;">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<form>
+				<h1>Detalle de la factura del pedido</h1>
+				<br>
+				<br>
+				<table border="1">
+					<th scope="col">Cliente</th>
+					<th scope="col">Fecha</th>
+					<th scope="col">Producto</th>
+					<th scope="col">Precio</th>
+					<th scope="col">Cantidad</th>
+					<th scope="col">Total</th>
+					<th scope="col">Estado</th>
+					<th scope="col">Detalle</th> 
+					<th></th>
+
+					<tr *ngFor="let persona of personas">
+						<td>{{persona.nombre}}</td>
+						<td>{{persona.fecha}}</td>
+						<td>{{persona.producto}}</td>
+						<td>{{persona.precio}}</td>
+						<td>{{persona.cantidad}}</td>
+						<td>{{persona.total}}</td>
+						<td>{{persona.estado}}</td>
+						<td>{{persona.detalle}}</td>
+						
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- Delete Modal HTML -->
+<div id="deletePedidoCli" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form>
+				<div class="modal-header">
+					<h4 class="modal-title">Eliminar Pedido</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">					
+					<p>¿Está seguro que quieres eliminar?</p>					
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+					<input type="submit" class="btn btn-danger" value="Eliminar">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!--TABLA-->
+<div class="container-fluid main-container">
+	<div class="table-title">
+		<div class="row">
+            <h3 class="col-md-10">&nbsp;&nbsp;Pedido</h3><br><br>			 
+			<div class="col">			
+				<a href="#addPedidoCli" class="btn btn-success" data-toggle="modal"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;<span> Nueva</span></a>
+			</div>
+		</div>
+	</div>
+	<div class="body animated fadeIn">
+		<div class="container-fluid">			
+			<div class="card my-3">
+				<br>
+			  <div class="container-fluid" aria-label="Page navigation example">
+				  <div class="table-responsive">
+					<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover">
+						<thead >
+						  <tr>
+                            <!--<th scope="col">#</th>-->
+                            <th scope="col">Cliente</th>
+							<th scope="col">Fecha</th>
+							
+                            <th scope="col">Total</th>
+							<th scope="col">Estado</th>
+							<th scope="col">Detalle</th> 
+							<th></th>   
+				  </thead>
+
+				  <tbody>
+					<tr *ngFor="let pedido of pedidos">
+					
+						<td>{{pedido.id_cli['nombre']}} {{pedido.id_cli['apellido']}}</td>
+						<td>{{pedido.fec_fac |date}}</td>
+						
+						<td>{{pedido.tot_fac}}</td>
+						<td>{{pedido.estado}}</td>
+						<td>{{pedido.detalle}}</td>										
+											
+						
+						<td>
+						  <div style="text-align: center;">							
+							<a href="#myModal" data-toggle="modal" class="btn btn-primary btn-lg">Detalle Pedido</a>&nbsp;&nbsp;&nbsp;
+							<a href="#deletePedidoCli" data-toggle="modal"  class="btn btn-primary btn-lg">Eliminar Pedido</a>
+
+							</div>
+						</td>
+					</tr>
+					
+					
+						<tr *ngFor="let persona of personas">
+							
+                            <td>{{persona.nombre}}</td>
+							<td>{{persona.fecha}}</td>
+							<td>{{persona.total}}</td>
+							<td>{{persona.estado}}</td>
+							<td>{{persona.detalle}}</td>
+
+                            <td>
+                                <div style="text-align: center">                            
+                            <a href="#myModal" data-toggle="modal" class="btn btn-primary btn-lg" (click)="guardar()">Detalle Pedido</a>&nbsp;&nbsp;&nbsp;
+                            <a href="#deletePedidoCli" data-toggle="modal"  class="btn btn-primary btn-lg">Eliminar Pedido</a>
+      
+                                  </div>
+						    </td>
+						</tr>
+
+					
+					
+					
+					
+				  </tbody>
+				</table>
+				
+
+			  </div>
+			  <br>
+			 
+			</div>
+		  </div>
+		</div>
+	  </div>
+</div>

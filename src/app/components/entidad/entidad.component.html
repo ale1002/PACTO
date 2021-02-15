@@ -1,0 +1,163 @@
+<!--NAVBAR-->
+
+<!--MODAL-->
+<!-- ADD Modal HTML -->
+<div id="addEntidad" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form  [formGroup]="entidadesForm" (ngSubmit)="enviar(entidadesForm.value)">
+
+				<div class="modal-header">						
+					<h4 class="modal-title">Nueva Entidad</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">					
+					<div class="form-group">
+						<label><b>Nombre:</b></label>
+						<input type="text" class="form-control"  required formControlName="nom_enti">
+					</div>
+					<div class="form-group">
+						<label><b>Tipo:</b></label>
+						<input type="text" class="form-control"  required formControlName="tipo_enti">
+					</div>
+					<div class="form-group">
+						<label><b>Direccion:</b></label>
+						<input type="text" class="form-control"  required formControlName="dir_enti">
+					</div>
+					<div class="form-group">
+						<label><b>Telefono:</b></label>
+						<input type="text" class="form-control"  required formControlName="tel_enti">
+                    </div>
+                    <div class="form-group">
+						<label><b>Pais:</b></label>
+						<input type="text" class="form-control"  required formControlName="pais_enti">
+					</div>
+					<div class="form-group">
+						<label><b>Ciudad:</b></label>
+						<input type="text" class="form-control"  required formControlName="ciu_enti">
+                    </div>					
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+					<input type="submit" class="btn btn-success" value="Agregar">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- Edit Modal HTML-->
+<div id="editEntidad" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form (ngSubmit)="onEdit( f )" #f="ngForm">
+				<div class="modal-header">						
+					<h4 class="modal-title">Editar Entidad</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">					
+					<div class="form-group">
+						<label><b>Nombre:</b></label>
+						<input [(ngModel)]="entidadUpdate.nom_enti" type="text" class="form-control" required name="nom_enti">
+					</div>
+					<div class="form-group">
+						<label><b>Tipo:</b></label>
+						<input [(ngModel)]="entidadUpdate.tipo_enti" type="text" class="form-control" required name="tipo_enti">
+					</div>
+					<div class="form-group">
+						<label><b>Direccion:</b></label>
+						<input [(ngModel)]="entidadUpdate.dir_enti" type="text" class="form-control" required name="dir_enti">
+					</div>
+					<div class="form-group">
+						<label><b>Telefono:</b></label>
+						<input [(ngModel)]="entidadUpdate.tel_enti" type="text" class="form-control" required name="tel_enti">
+                    </div>
+                    <div class="form-group">
+						<label><b>Pais:</b></label>
+						<input [(ngModel)]="entidadUpdate.pais_enti" type="text" class="form-control" required name="pais_enti">
+					</div>
+					<div class="form-group">
+						<label><b>Ciudad:</b></label>
+						<input [(ngModel)]="entidadUpdate.ciu_enti" type="text" class="form-control" required name="ciu_enti">
+                    </div>
+                  
+										
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+					<input type="submit" class="btn btn-info" value="Guardar">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- Delete Modal HTML -->
+<div id="deleteEntidad" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form  (ngSubmit)="delete()">
+				<div class="modal-header">						
+					<h4 class="modal-title">Eliminar Entidad</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">					
+					<p>¿Está seguro que quieres eliminar?</p>					
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+					<input type="submit" class="btn btn-danger" value="Eliminar">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="body animated fadeIn">
+	<div class="container-fluid">
+	  <div>
+		<br>
+		<div class="row">
+		  <h3 class="col-md-10">&nbsp;&nbsp;Entidades Externas</h3><br><a [routerLink]="['/capacitacion']" routerLinkActive="router-link-active"  class="edit btn btn-danger" data-toggle="modal">Regresar</a>
+		  <div class="col">
+			<a href="#addEntidad" class="btn btn-success" data-toggle="modal"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;<span>Agregar</span></a>
+		  </div>
+		</div>
+		<div class="card my-3">
+		  <br>
+		  <div class="container-fluid table-responsive" aria-label="Page navigation example">
+			<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover">
+			  <thead>
+				<tr>
+					<th scope="col" class="text-center">Nombre</th>
+					<th scope="col" class="text-center">Tipo</th>
+					<th scope="col" class="text-center">Direccion</th>
+					<th scope="col" class="text-center">Telefono</th>
+					<th scope="col" class="text-center">Pais</th>
+					<th scope="col" class="text-center">Ciudad</th>
+					<th scope="col" class="text-center">Acciones</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr *ngFor="let entidad of entidades">
+					<td>{{entidad.nom_enti}}</td>
+					<td>{{entidad.tipo_enti}}</td>
+					<td>{{entidad.dir_enti}}</td>
+					<td>{{entidad.tel_enti}}</td>
+					<td>{{entidad.pais_enti}}</td>
+					<td>{{entidad.ciu_enti}}</td>
+					<td>
+					  		<div style="text-align: center">									  
+						  		<a href="#editEntidad" class="btn btn-outline-warning" data-toggle="modal" (click)="openModalActualizar(entidad._id)"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;
+						  		<a href="#deleteEntidad" class="btn btn-outline-danger" data-toggle="modal" (click)="openModalActualizar(entidad._id)"><i class="far fa-trash-alt"></i></a>
+					 		</div>
+					</td>
+				  </tr>
+			  </tbody>
+			</table>
+		  </div>
+		  <br>
+		</div>
+	  </div>
+	</div>
+  </div>
+  
